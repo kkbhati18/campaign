@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import {API_URL} from '../../../constants';
-import {saveUser} from '../Auth/action';
+import {saveUser, onSignOut} from '../Auth/action';
 import {USER} from '../Auth/actionTypes';
 
 export const Home = option => {
@@ -18,6 +18,9 @@ export const Home = option => {
         },
       });
       if (!response.ok) {
+        if (response.status === 401) {
+          dispatch(onSignOut());
+        }
         dispatch({
           type: actionTypes.HOME_LOADING,
           payload: false,
