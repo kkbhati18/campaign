@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchingAuth} from '../../store/action/Auth/action';
 import {TostMsg} from '../../components/utility/Tools';
@@ -8,7 +8,7 @@ import {COLORS, SIZES, images} from '../../constants';
 import Form from '../../components/utility/Form';
 import {PrimaryButton} from '../../components/Button/Button';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const Loading = useSelector(state => state.auth.loading);
   const [UserName, setUserName] = React.useState('');
@@ -67,6 +67,11 @@ const Login = () => {
         disabled={Loading}
         onPress={() => onPress()}
       />
+      <TouchableOpacity
+        style={{marginVertical: 20}}
+        onPress={() => navigation.navigate('SingUp')}>
+        <Text style={styles.text}>Create New Account</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: SIZES.h3,
-    color: COLORS.text,
+    color: COLORS.secondary,
     fontWeight: 'bold',
   },
 });

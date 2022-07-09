@@ -10,7 +10,7 @@ export const FcmToken = token => {
   };
 };
 
-const saveToken = async (data) => {
+const saveToken = async data => {
   await AsyncStorage.setItem('token', data);
 };
 
@@ -58,6 +58,7 @@ export const onSignOut = () => {
     }
   };
 };
+
 export const fetchingAuth = option => {
   return async dispatch => {
     dispatch({
@@ -135,6 +136,45 @@ export const fetchingTp = () => {
         type: actionTypes.AUTH_LOADING,
         payload: false,
       });
+    } catch (err) {
+      dispatch({
+        type: actionTypes.AUTH_LOADING,
+        payload: false,
+      });
+      throw err;
+    }
+  };
+};
+
+export const onSingUp = option => {
+  return async dispatch => {
+    dispatch({
+      type: actionTypes.AUTH_LOADING,
+      payload: true,
+    });
+    try {
+      const response = await fetch(API_URL + 'signup', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(option.body),
+      });
+      if (!response.ok) {
+        dispatch({
+          type: actionTypes.AUTH_LOADING,
+          payload: false,
+        });
+        const res = await response.json();
+        throw new Error(res.message);
+      }
+      const resData = await response.json();
+      dispatch({
+        type: actionTypes.AUTH_LOADING,
+        payload: false,
+      });
+      return resData
     } catch (err) {
       dispatch({
         type: actionTypes.AUTH_LOADING,
