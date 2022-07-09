@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CookieManager from '@react-native-community/cookies';
+import CookieManager from '@react-native-cookies/cookies';
 import {API_URL} from '../../../constants';
 
 export const FcmToken = token => {

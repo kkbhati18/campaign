@@ -1,8 +1,8 @@
 import React from 'react';
 import Home from './Home';
 
-const index = ({navigation}) => {
+const Index = ({navigation}) => {
   return <Home navigation={navigation} />;
 };
 
-export default index;
+export default Index;

@@ -13,7 +13,7 @@ function AuthNavigator() {
   const auth = useSelector((state) => state.auth);
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode={false}>
+      <Stack.Navigator screenOptions={{headerShown:false}}>
         {auth.Splash ? (
           <Stack.Screen name="Splash" component={SplashScreen} />
         ) : auth.token == null ? (

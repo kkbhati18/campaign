@@ -1,8 +1,8 @@
 import React from 'react';
 import DrawerContent from './DrawerContent';
 
-const index = (props) => {
+const Index = (props) => {
   return <DrawerContent props={props} />;
 };
 
-export default index;
+export default Index;

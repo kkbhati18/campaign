@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 export default function SignOutStack() {
   return (
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );

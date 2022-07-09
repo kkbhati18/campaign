@@ -54,7 +54,7 @@ function LoadingDots({dots, colors, size, bounceHeight, borderRadius}) {
 
   function loadingAnimation(nodes, reverseY) {
     Animated.parallel(
-      nodes.map((node, index) => floatAnimation(node, reverseY, index * 100)),
+      nodes.map((node, Index) => floatAnimation(node, reverseY, Index * 100)),
     ).start(() => {
       setReverse(!reverse);
     });
@@ -67,9 +67,9 @@ function LoadingDots({dots, colors, size, bounceHeight, borderRadius}) {
 
   return (
     <Animated.View style={[styles.loading, {opacity}]}>
-      {animations.map((animation, index) => (
+      {animations.map((animation, Index) => (
         <Animated.View
-          key={`loading-anim-${index}`}
+          key={`loading-anim-${Index}`}
           style={[
             {
               width: size,
