@@ -1,7 +1,7 @@
 import {APP_VER, HOME_LOADING} from '../action/Home/actionTypes';
 
 const initialState = {
-  App_data: {},
+  App_ver: {},
   loading: false,
 };
 
@@ -16,7 +16,7 @@ const HomeReducer = (state = initialState, action) => {
     case APP_VER:
       return {
         ...state,
-        App_data: {...action.payload},
+        App_ver: {...action.payload},
       };
     default:
       return state;

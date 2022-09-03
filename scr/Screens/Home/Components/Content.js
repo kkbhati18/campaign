@@ -10,11 +10,18 @@ import {
 import {useIsFocused} from '@react-navigation/native';
 import {COLORS, SIZES, images} from '../../../constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {Home, CustomerData} from '../../../store/action/Home/action';
-import {TostMsg, wait} from '../../../components/utility/Tools';
+import {Home} from '../../../store/action/Home/action';
+import {
+  sendWhatsApp,
+  TostMsg,
+  wait,
+  sendSms,
+} from '../../../components/utility/Tools';
 import Form from '../../../components/utility/Form';
-import {PrimaryButton} from '../../../components/Button/Button';
-import LoadingDots from '../../../components/Loader/LoadingDots';
+import {
+  PrimaryButton,
+  SecondaryButton,
+} from '../../../components/Button/Button';
 import {AppUpdate} from '../../../components/utility/UpdateOffline';
 import {version as app_version} from '../../../../package.json';
 
@@ -24,9 +31,9 @@ const Content = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const Load = useSelector(state => state.home.loading);
   const user = useSelector(state => state.auth.user);
-  const App = useSelector(state => state.home.App_data);
+  const App = useSelector(state => state.home.App_ver);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [mobile, setMobile] = React.useState('');
+  const [mobile, setMobile] = React.useState('+91');
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -48,12 +55,22 @@ const Content = ({navigation}) => {
     }
   }, [isFocused, refreshing]);
 
-  const onPress = async () => {
-    let option = {token: token, body: {mobile: mobile}};
+  const onSms = async () => {
+    let msg = ' jai baba ki';
     try {
-      await dispatch(CustomerData(option));
+      await sendSms(mobile, msg);
       setRefreshing(true);
-      setMobile('');
+      setMobile('+91');
+    } catch (err) {
+      TostMsg(err);
+    }
+  };
+  const onWhatsApp = async () => {
+    let msg = ' jai baba ki';
+    try {
+      await sendWhatsApp(mobile, msg);
+      setRefreshing(true);
+      setMobile('+91');
     } catch (err) {
       TostMsg(err);
     }
@@ -75,32 +92,34 @@ const Content = ({navigation}) => {
         <Form
           name={'Mobile Number'}
           placeholder={'Enter new Customer mobile num'}
-          keyboardType={'numeric'}
+          keyboardType={'phone-pad'}
           value={mobile}
-          maxLength={10}
+          style={{fontSize: SIZES.body2, fontWeight: 'bold'}}
+          maxLength={13}
           onChangeText={data => {
             setMobile(data);
           }}
         />
-        <PrimaryButton
-          title={
-            Load ? (
-              <LoadingDots
-                dots={3}
-                colors={COLORS.white}
-                size={10}
-                bounceHeight={5}
-              />
-            ) : (
-              'Submit'
-            )
-          }
-          disabled={Load}
-          onPress={() => onPress()}
-        />
+        <View>
+          <SecondaryButton
+            title={'Whats App'}
+            disabled={Load}
+            color={COLORS.green}
+            titleColor={COLORS.white}
+            onPress={() => onWhatsApp()}
+          />
+          <PrimaryButton
+            title={' SMS'}
+            disabled={Load}
+            onPress={() => onSms()}
+          />
+        </View>
         <View style={styles.textCon}>
           <Text style={styles.headline}>Campaign Details</Text>
-          <Text style={styles.Text}>This Campaign running for NEARONE APP .per user Referral reward is ₹5 </Text>
+          <Text style={styles.Text}>
+            This Campaign running for NEARONE APP .per user Referral reward is
+            ₹5{' '}
+          </Text>
         </View>
       </ScrollView>
       {Object.keys(App).length !== 0 && (

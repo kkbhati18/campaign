@@ -1,5 +1,5 @@
 import React from 'react';
-import {PermissionsAndroid, ToastAndroid, Platform} from 'react-native';
+import {ToastAndroid, Platform, Linking} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import {useDispatch} from 'react-redux';
 import {FcmToken} from '../../store/action/Auth/action';
@@ -95,12 +95,46 @@ export const CreateFormData = (name, photo, body = {}) => {
     type: photo.type,
     uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
   });
-  Object.keys(body).forEach((key) => {
+  Object.keys(body).forEach(key => {
     data.append(key, body[key]);
   });
   return data;
 };
 
-export const wait = (timeout) => {
-  return new Promise((resolve) => setTimeout(resolve, timeout));
+export const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
+export const sendWhatsApp = (mobile, msg) => {
+  if (mobile.length > 10) {
+    if (msg) {
+      let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
+      Linking.openURL(url)
+        .then(data => {
+          // console.log('WhatsApp Opened', data);
+        })
+        .catch(() => {
+          throw new Error('Make sure WhatsApp installed on your device');
+        });
+    } else {
+      throw new Error('Please insert message to send');
+    }
+  } else {
+    throw new Error('Please insert mobile no');
+  }
+};
+
+export const sendSms = (mobile, msg) => {
+  if (mobile.length > 10) {
+    if (msg) {
+      let url = 'sms:' + mobile + '?body=' + msg;
+      Linking.openURL(url).catch(() => {
+        throw new Error('something went wrong');
+      });
+    } else {
+      throw new Error('something went wrong');
+    }
+  } else {
+    throw new Error('Please insert mobile no');
+  }
 };

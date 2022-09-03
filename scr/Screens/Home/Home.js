@@ -21,6 +21,7 @@ const Home = ({navigation}) => {
     };
     fetching();
   }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Header navigation={navigation} />

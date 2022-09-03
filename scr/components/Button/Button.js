@@ -12,39 +12,13 @@ export const PrimaryButton = ({title, onPress}) => {
   );
 };
 
-export const SecondaryButton = ({title, onPress}) => {
+export const SecondaryButton = ({title, onPress, color, titleColor}) => {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-      <View style={{...style.btnContainer, backgroundColor: COLORS.white}}>
-        <Text style={{...style.title, color: COLORS.primary}}>{title}</Text>
+      <View style={{...style.btnContainer, backgroundColor: color}}>
+        <Text style={{...style.title, color: titleColor}}>{title}</Text>
       </View>
     </TouchableOpacity>
-  );
-};
-
-export const BorderedButton = ({title, onPress}) => {
-  return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-      <View
-        style={{
-          ...style.btnContainer,
-          backgroundColor: COLORS.white,
-          borderWidth: 1,
-          borderColor: COLORS.primary,
-        }}>
-        <Text style={{...style.title, color: COLORS.primary}}>{title}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
-
-export const SmallButton = ({title, onPress}) => {
-  return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-    <View style={{...style.btnContainer, backgroundColor: COLORS.white,height:30,paddingHorizontal:10}}>
-      <Text style={{...style.title, color: COLORS.primary,margin:5}}>{title}</Text>
-    </View>
-  </TouchableOpacity>
   );
 };
 
@@ -53,7 +27,7 @@ const style = StyleSheet.create({
     color: COLORS.white,
     fontWeight: 'bold',
     fontSize: 18,
-    margin:10,
+    margin: 10,
   },
   btnContainer: {
     backgroundColor: COLORS.primary,
@@ -63,5 +37,3 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-

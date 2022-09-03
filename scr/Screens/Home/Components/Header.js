@@ -14,10 +14,8 @@ const Header = ({navigation}) => {
         color={COLORS.white}
         style={{marginLeft: 10}}
       />
-      <View style={{alignItems: 'center', flex: 1}}>
-        <Text style={{fontSize: 20, fontWeight: 'bold', color: COLORS.white}}>
-          CAMPAIGN
-        </Text>
+      <View style={{flex: 1}}>
+        <Text style={style.text}>CAMPAIGN</Text>
       </View>
     </View>
   );
@@ -28,6 +26,13 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.primary,
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: COLORS.white,
+    textAlign: 'center',
+    marginRight: 45,
   },
 });
 

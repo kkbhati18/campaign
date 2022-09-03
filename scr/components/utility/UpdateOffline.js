@@ -8,7 +8,7 @@ import {PrimaryButton} from '../Button/Button';
 
 export const AppUpdate = ({version, refreshing}) => {
   const actionSheetRef = React.useRef();
-  const {app_url, app_version} = useSelector((state) => state.home.App_data);
+  const {app_url, app_version} = useSelector((state) => state.home.App_ver);
 
   React.useEffect(() => {
     if (version < app_version) {
