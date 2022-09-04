@@ -109,13 +109,9 @@ export const sendWhatsApp = (mobile, msg) => {
   if (mobile.length > 10) {
     if (msg) {
       let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
-      Linking.openURL(url)
-        .then(data => {
-          // console.log('WhatsApp Opened', data);
-        })
-        .catch(() => {
-          throw new Error('Make sure WhatsApp installed on your device');
-        });
+      Linking.openURL(url).catch(() => {
+        throw new Error('Make sure WhatsApp installed on your device');
+      });
     } else {
       throw new Error('Please insert message to send');
     }

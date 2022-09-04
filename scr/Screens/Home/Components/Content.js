@@ -56,7 +56,7 @@ const Content = ({navigation}) => {
   }, [isFocused, refreshing]);
 
   const onSms = async () => {
-    let msg = ' jai baba ki';
+    let msg = 'https://nearonecampaign.page.link/eNh4';
     try {
       await sendSms(mobile, msg);
       setRefreshing(true);
@@ -66,7 +66,7 @@ const Content = ({navigation}) => {
     }
   };
   const onWhatsApp = async () => {
-    let msg = ' jai baba ki';
+    let msg = 'https://nearonecampaign.page.link/eNh4';
     try {
       await sendWhatsApp(mobile, msg);
       setRefreshing(true);
