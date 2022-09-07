@@ -9,6 +9,7 @@ import {COLORS, images} from '../../constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {onSignOut} from '../../store/action/Auth/action';
 import {TostMsg} from '../../components/utility/Tools';
+import {version as app_version} from '../../../package.json';
 
 const DrawerContent = ({props}) => {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ const DrawerContent = ({props}) => {
         </View>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
+      <Text style={styles.text}>App ver({app_version})Beta</Text>
       <TouchableOpacity
         style={styles.bottomDrawerSection}
         activeOpacity={1}
@@ -93,6 +95,11 @@ const styles = StyleSheet.create({
     borderTopColor: '#f4f4f4',
     borderTopWidth: 1,
     backgroundColor: COLORS.primary,
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 16,
+    marginBottom: 10,
   },
 });
 export default DrawerContent;

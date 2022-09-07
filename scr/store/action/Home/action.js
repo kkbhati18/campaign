@@ -35,6 +35,10 @@ export const Home = option => {
         payload: resData.user,
       });
       dispatch({
+        type: actionTypes.APP_DATA,
+        payload: resData.referral_url,
+      });
+      dispatch({
         type: actionTypes.HOME_LOADING,
         payload: false,
       });

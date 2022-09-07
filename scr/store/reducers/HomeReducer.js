@@ -1,8 +1,9 @@
-import {APP_VER, HOME_LOADING} from '../action/Home/actionTypes';
+import {APP_VER, HOME_LOADING, APP_DATA} from '../action/Home/actionTypes';
 
 const initialState = {
   App_ver: {},
   loading: false,
+  App_data: null,
 };
 
 const HomeReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const HomeReducer = (state = initialState, action) => {
       return {
         ...state,
         App_ver: {...action.payload},
+      };
+    case APP_DATA:
+      return {
+        ...state,
+        App_data: action.payload,
       };
     default:
       return state;

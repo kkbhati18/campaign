@@ -32,6 +32,7 @@ const Content = ({navigation}) => {
   const Load = useSelector(state => state.home.loading);
   const user = useSelector(state => state.auth.user);
   const App = useSelector(state => state.home.App_ver);
+  const Url = useSelector(state => state.home.App_data);
   const [refreshing, setRefreshing] = React.useState(false);
   const [mobile, setMobile] = React.useState('+91');
 
@@ -56,7 +57,7 @@ const Content = ({navigation}) => {
   }, [isFocused, refreshing]);
 
   const onSms = async () => {
-    let msg = 'https://nearonecampaign.page.link/eNh4';
+    let msg = Url;
     try {
       await sendSms(mobile, msg);
       setRefreshing(true);
@@ -66,7 +67,7 @@ const Content = ({navigation}) => {
     }
   };
   const onWhatsApp = async () => {
-    let msg = 'https://nearonecampaign.page.link/eNh4';
+    let msg = Url;
     try {
       await sendWhatsApp(mobile, msg);
       setRefreshing(true);
@@ -82,7 +83,10 @@ const Content = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         style={styles.container}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing || Load}
+            onRefresh={onRefresh}
+          />
         }>
         <View style={styles.imgCon}>
           <Image source={images.avatar_5} style={styles.image} />
@@ -100,14 +104,14 @@ const Content = ({navigation}) => {
             setMobile(data);
           }}
         />
-        <View>
-          <SecondaryButton
-            title={'Whats App'}
-            disabled={Load}
-            color={COLORS.green}
-            titleColor={COLORS.white}
-            onPress={() => onWhatsApp()}
-          />
+        <SecondaryButton
+          title={'Whats App'}
+          disabled={Load}
+          color={COLORS.green}
+          titleColor={COLORS.white}
+          onPress={() => onWhatsApp()}
+        />
+        <View style={{marginTop: 10}}>
           <PrimaryButton
             title={' SMS'}
             disabled={Load}
@@ -117,8 +121,8 @@ const Content = ({navigation}) => {
         <View style={styles.textCon}>
           <Text style={styles.headline}>Campaign Details</Text>
           <Text style={styles.Text}>
-            This Campaign running for NEARONE APP .per user Referral reward is
-            ₹5{' '}
+            This Campaign running for NEARONE APP .per user Referral reward is ₹
+            {user.referral_point}
           </Text>
         </View>
       </ScrollView>
