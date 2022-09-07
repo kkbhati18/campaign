@@ -113,7 +113,7 @@ export const sendWhatsApp = (mobile, msg) => {
         throw new Error('Make sure WhatsApp installed on your device');
       });
     } else {
-      throw new Error('Please insert message to send');
+      throw new Error('something went wrong');
     }
   } else {
     throw new Error('Please insert mobile no');
