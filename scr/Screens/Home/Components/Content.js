@@ -120,9 +120,9 @@ const Content = ({navigation}) => {
         </View>
         <View style={styles.textCon}>
           <Text style={styles.headline}>Campaign Details</Text>
+          <Text style={styles.Text}>This Campaign running for NEARONE APP</Text>
           <Text style={styles.Text}>
-            This Campaign running for NEARONE APP .per user Referral reward is ₹
-            {user.referral_point}
+            per user Referral reward is ₹{user.referral_point}
           </Text>
         </View>
       </ScrollView>
