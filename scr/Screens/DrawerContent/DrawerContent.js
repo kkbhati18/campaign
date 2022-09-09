@@ -5,7 +5,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {COLORS, images,SIZES} from '../../constants';
+import {COLORS, images, SIZES} from '../../constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {onSignOut} from '../../store/action/Auth/action';
 import {TostMsg} from '../../components/utility/Tools';
@@ -14,10 +14,12 @@ import {version as app_version} from '../../../package.json';
 const DrawerContent = ({props}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const token = useSelector(state => state.auth.token);
 
   const onPress = async () => {
+    let option = {token: token};
     try {
-      await dispatch(onSignOut());
+      await dispatch(onSignOut(option));
     } catch (error) {
       TostMsg(error);
     }
@@ -33,8 +35,8 @@ const DrawerContent = ({props}) => {
                 source={images.avatar}
                 style={{width: 50, height: 50, borderRadius: 25}}
               />
-              <View style={{marginLeft: 15,width:SIZES.width/2.5}}>
-              <Text style={styles.title}>{user.name}</Text>
+              <View style={{marginLeft: 15, width: SIZES.width / 2.5}}>
+                <Text style={styles.title}>{user.name}</Text>
                 <Text style={styles.title}>{user.email}</Text>
               </View>
             </View>
